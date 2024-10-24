@@ -1,2 +1,2 @@
 streamlit==1.20.0
-numpy  # You may adjust the version based on compatibility
+numpy>=1.21.0
