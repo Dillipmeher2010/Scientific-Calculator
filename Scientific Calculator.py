@@ -9,8 +9,8 @@ input_method = st.radio("Choose input method", ("Slider", "Number Input"))
 
 # Conditional input fields based on the selected method
 if input_method == "Slider":
-    num1 = st.slider("Select the first number", min_value=-100, max_value=100, value=0)  # Adjust range as needed
-    num2 = st.slider("Select the second number", min_value=-100, max_value=100, value=0)  # Adjust range as needed
+    num1 = st.slider("Select the first number", min_value=-100, max_value=100, value=0)
+    num2 = st.slider("Select the second number", min_value=-100, max_value=100, value=0)
 else:  # Number Input
     num1 = st.number_input("Enter the first number", value=0)
     num2 = st.number_input("Enter the second number", value=0)
@@ -65,5 +65,5 @@ if st.button("Calculate"):
         else:
             st.error("Error: Logarithm of non-positive numbers is undefined.")
 
-# Display your photo
-st.image("0002.jpg", caption="Dillip Meher", width=100)  # Adjust the width to your preference
+# Uncomment the following line if you want to include an image (ensure the file path is correct)
+# st.image("0002.jpg", caption="Dillip Meher", width=100)  # Adjust the width to your preference
