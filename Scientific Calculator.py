@@ -1,66 +1,35 @@
 import streamlit as st
-import math
+import numpy as np
 
-# Title of the app
-st.title("Scientific Calculator App")
+# Title of the application
+st.title("Scientific Calculator")
 
-# Input method selection
-input_method = st.radio("Choose input method", ("Slider", "Number Input"))
+# Input fields for numbers
+num1 = st.number_input("Enter the first number:", value=0.0)
+num2 = st.number_input("Enter the second number:", value=0.0)
 
-# Conditional input fields based on the selected method
-if input_method == "Slider":
-    num1 = st.slider("Select the first number", min_value=-100, max_value=100, value=0)  # Adjust range as needed
-    num2 = st.slider("Select the second number", min_value=-100, max_value=100, value=0)  # Adjust range as needed
-else:  # Number Input
-    num1 = st.number_input("Enter the first number", value=0)
-    num2 = st.number_input("Enter the second number", value=0)
+# Dropdown for operations
+operation = st.selectbox("Choose an operation:", ["Add", "Subtract", "Multiply", "Divide", "Square Root", "Power", "Sine", "Cosine", "Tangent"])
 
-# Dropdown for operation selection
-operation = st.selectbox("Choose the operation", (
-    "Add", "Subtract", "Multiply", "Divide", 
-    "Square Root (of first number)", "Exponentiation", 
-    "Sine (in degrees)", "Cosine (in degrees)", "Tangent (in degrees)", 
-    "Logarithm (base 10) of first number"
-))
+# Calculation based on the selected operation
+if operation == "Add":
+    result = num1 + num2
+elif operation == "Subtract":
+    result = num1 - num2
+elif operation == "Multiply":
+    result = num1 * num2
+elif operation == "Divide":
+    result = num1 / num2 if num2 != 0 else "Error! Division by zero."
+elif operation == "Square Root":
+    result = np.sqrt(num1)
+elif operation == "Power":
+    result = np.power(num1, num2)
+elif operation == "Sine":
+    result = np.sin(np.radians(num1))
+elif operation == "Cosine":
+    result = np.cos(np.radians(num1))
+elif operation == "Tangent":
+    result = np.tan(np.radians(num1))
 
-# Perform calculation based on user input
-if st.button("Calculate"):
-    if operation == "Add":
-        result = num1 + num2
-        st.success(f"The result of {num1} + {num2} is: {result}")
-    elif operation == "Subtract":
-        result = num1 - num2
-        st.success(f"The result of {num1} - {num2} is: {result}")
-    elif operation == "Multiply":
-        result = num1 * num2
-        st.success(f"The result of {num1} * {num2} is: {result}")
-    elif operation == "Divide":
-        if num2 != 0:
-            result = num1 / num2
-            st.success(f"The result of {num1} / {num2} is: {result}")
-        else:
-            st.error("Error: Division by zero is not allowed.")
-    elif operation == "Square Root (of first number)":
-        if num1 >= 0:
-            result = math.sqrt(num1)
-            st.success(f"The square root of {num1} is: {result}")
-        else:
-            st.error("Error: Cannot take the square root of a negative number.")
-    elif operation == "Exponentiation":
-        result = num1 ** num2
-        st.success(f"{num1} raised to the power of {num2} is: {result}")
-    elif operation == "Sine (in degrees)":
-        result = math.sin(math.radians(num1))
-        st.success(f"The sine of {num1} degrees is: {result}")
-    elif operation == "Cosine (in degrees)":
-        result = math.cos(math.radians(num1))
-        st.success(f"The cosine of {num1} degrees is: {result}")
-    elif operation == "Tangent (in degrees)":
-        result = math.tan(math.radians(num1))
-        st.success(f"The tangent of {num1} degrees is: {result}")
-    elif operation == "Logarithm (base 10) of first number":
-        if num1 > 0:
-            result = math.log10(num1)
-            st.success(f"The logarithm (base 10) of {num1} is: {result}")
-        else:
-            st.error("Error: Logarithm of non-positive numbers is undefined.")
+# Displaying the result
+st.write("Result:", result)
